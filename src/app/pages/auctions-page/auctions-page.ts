@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import {AuctionBlock} from '../../components/auction-block/auction-block';
+import {AuctionCard} from '../../components/auction-card/auction-card';
 
 @Component({
   selector: 'app-auctions-page',
   imports: [
-    AuctionBlock
+    AuctionCard
   ],
   templateUrl: './auctions-page.html',
   styleUrl: './auctions-page.css',
