@@ -2,9 +2,9 @@
   <div class="card" style="width: 18rem;">
     <img src="https://www.maxishopbevtoft.dk/eetihook/2025/05/roed-maxi-1.jpg" class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">17. nov. 2025, 09.00</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <h5 class="card-title">{{ auction.title }}</h5>
+      <p class="card-text">{{ auction.endDate | date:'EEEE d. MMMM yyyy HH:mm:ss' }}</p>
+      <a href="#" class="btn btn-primary">See lots!</a>
     </div>
   </div>
 </div>

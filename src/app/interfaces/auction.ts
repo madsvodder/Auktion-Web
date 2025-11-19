@@ -1,7 +1,7 @@
 export interface Auction {
-  Id: number;
-  Title: string;
-  Description: string;
-  StartDate: Date,
-  EndDate: Date,
+  id: number;
+  title: string;
+  description: string;
+  startDate: Date,
+  endDate: Date,
 }

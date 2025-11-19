@@ -3,8 +3,8 @@
 <app-sidebar></app-sidebar>
 <div class="main">
   <div class="cards">
-    @for (i of [].constructor(10); track $index) {
-      <app-auction-card></app-auction-card>
+    @for (auction of apiService.auctions(); track auction) {
+      <app-auction-card [auction]="auction"></app-auction-card>
     }
   </div>
 </div>
