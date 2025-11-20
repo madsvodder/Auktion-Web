@@ -2,18 +2,21 @@ import {Component, inject, OnInit} from '@angular/core';
 import {Auction} from '../../interfaces/auction';
 import {ApiService} from '../../services/api-service';
 import {ActivatedRoute} from '@angular/router';
+import {AuctionCard} from '../../components/auction-card/auction-card';
 
 @Component({
-  selector: 'app-lots-page',
+  selector: 'app-auction-view',
   standalone: true,
-  imports: [],
+  imports: [
+    AuctionCard
+  ],
   templateUrl: './auction-view.html',
   styleUrl: './auction-view.css',
 })
 export class AuctionView implements OnInit {
 
   private route = inject(ActivatedRoute);
-  private apiService = inject(ApiService);
+  public apiService = inject(ApiService);
 
   auction: Auction | null = null;
 
@@ -24,6 +27,10 @@ export class AuctionView implements OnInit {
       this.auction = this.apiService
         .auctions()
         .find(a => a.id.toString() === id) ?? null;
+
+      if (this.auction) {
+        this.apiService.loadLotsFromAuction(this.auction?.id)
+      }
     }
   }
 }

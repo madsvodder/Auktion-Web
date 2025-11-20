@@ -1,0 +1,28 @@
+<div>
+  <div id="lot-info">
+    <h3 id="title">{{ auction?.title }}</h3>
+
+    <hr>
+
+    <h5>Beskrivelse</h5>
+    <p>{{ auction?.description }}</p>
+
+    <hr>
+
+    <h5>Auktionen slutter</h5>
+    <p>{{ auction?.endDate }}</p>
+  </div>
+</div>
+
+<div class="cards">
+  @for (lot of apiService.lots(); track lot) {
+    <div class="card" style="width: 18rem;">
+      <img src="https://images.ctfassets.net/yb682zl7v5ka/2957544974423012041/35ee7f891e411630a2885e738657181d/maxi1.png?w=1200&h=1047&fm=webp" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{ lot.title }}</h5>
+        <p class="card-text">{{ lot.description }}</p>
+        <a href="#" class="btn btn-primary">Bid</a>
+      </div>
+    </div>
+  }
+</div>

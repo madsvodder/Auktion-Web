@@ -1,0 +1,10 @@
+#lot-info {
+  width: 80%;
+  border: 2px solid #000000;
+  margin: auto;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+}

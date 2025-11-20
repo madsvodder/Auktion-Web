@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import {AuctionsPage} from './pages/auctions-page/auctions-page';
 import {CreateAuctionPage} from './pages/create-auctions-page/create-auction-page';
-import {AuctionView} from './pages/lots-page/auction-view';
+import {AuctionView} from './pages/auction-view/auction-view';
 
 export const routes: Routes = [
   {path: '', component: AuctionsPage, title: 'Auctions'},
