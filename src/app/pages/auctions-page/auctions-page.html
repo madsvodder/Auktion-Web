@@ -4,10 +4,15 @@
 <div class="main">
   <div class="cards">
     @for (auction of apiService.auctions(); track auction) {
-      <app-auction-card [auction]="auction"></app-auction-card>
+      <!-- TITLE BURDE VÆRE ID -->
+      <a [routerLink]="['/auctions', auction.id]">
+        <app-auction-card [auction]="auction"></app-auction-card>
+      </a>
     }
   </div>
 </div>
+
+
 
 
 

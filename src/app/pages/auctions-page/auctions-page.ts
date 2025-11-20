@@ -2,12 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {AuctionCard} from '../../components/auction-card/auction-card';
 import {Sidebar} from '../../components/sidebar/sidebar';
 import {ApiService} from '../../services/api-service';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-auctions-page',
   imports: [
     AuctionCard,
-    Sidebar
+    Sidebar,
+    RouterLink
   ],
   templateUrl: './auctions-page.html',
   styleUrl: './auctions-page.css',

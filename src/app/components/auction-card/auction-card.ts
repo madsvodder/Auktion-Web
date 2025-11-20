@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {Auction} from '../../interfaces/auction';
 import {DatePipe} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-auction-card',
@@ -11,6 +12,9 @@ import {DatePipe} from '@angular/common';
   styleUrl: './auction-card.css',
 })
 export class AuctionCard implements OnInit {
+
+  private router = inject(Router);
+
   @Input() auction!: Auction;
 
   ngOnInit() {

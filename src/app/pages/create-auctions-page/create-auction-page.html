@@ -1,0 +1,24 @@
+<p>create-auctions-page works!</p>
+
+<div class="main">
+  <div class="form-group">
+  <form [formGroup]="form" (ngSubmit)="createAuction()">
+    <label for="title">Title</label>
+    <input formControlName="title" class="form-control" type="text" id="title">
+
+    <hr>
+
+    <label for="description">Description</label>
+    <textarea formControlName="description" class="form-control" id="description" rows="3"></textarea>
+
+    <hr>
+
+    <label for="end">End date</label>
+    <input class="form-control" type="date" id="end">
+
+    <hr>
+
+    <button type="submit" class="btn btn-primary" routerLink="/create-auction">Create Auction</button>
+  </form>
+  </div>
+</div>

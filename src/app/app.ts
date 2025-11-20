@@ -4,7 +4,7 @@ import {AuctionsPage} from './pages/auctions-page/auctions-page';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, AuctionsPage],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
