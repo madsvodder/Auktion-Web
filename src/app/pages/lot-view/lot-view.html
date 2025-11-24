@@ -1,0 +1,32 @@
+<div class="main">
+
+  <h1>{{ lot?.title }}</h1>
+
+  <div class="data">
+    <div class="images">
+
+    </div>
+
+    <div class="info">
+      <div class="meta">
+        <h4> Lot nr. {{ lot?.lotNumber }}</h4>
+        <hr>
+        <p>{{ lot?.description }}</p>
+      </div>
+
+      <hr>
+
+      <div class="bidding">
+
+        <div class="bid">
+          <label for="amount">Amount:</label>
+          <input [(ngModel)]="bidAmount" type="number" id="amount" name="amount" min="1">
+          <button (click)="bidOnLot()">Byd!</button>
+        </div>
+
+        <app-bid-overview [lot]="lot"></app-bid-overview>
+      </div>
+    </div>
+  </div>
+</div>
+

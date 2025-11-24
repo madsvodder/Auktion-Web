@@ -1,0 +1,5 @@
+<div>
+  @for (bid of apiService.bidsInCurrentLot(); track bid) {
+    <p>{{ bid.userId }} - {{ bid.amount }}</p>
+  }
+</div>

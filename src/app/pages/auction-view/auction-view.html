@@ -21,7 +21,7 @@
       <div class="card-body">
         <h5 class="card-title">{{ lot.title }}</h5>
         <p class="card-text">{{ lot.description }}</p>
-        <a href="#" class="btn btn-primary">Bid</a>
+        <a [routerLink]="['/lot', lot.id]" class="btn btn-primary">Go To Lot</a>
       </div>
     </div>
   }

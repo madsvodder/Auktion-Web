@@ -1,14 +1,13 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {Auction} from '../../interfaces/auction';
 import {ApiService} from '../../services/api-service';
-import {ActivatedRoute} from '@angular/router';
-import {AuctionCard} from '../../components/auction-card/auction-card';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-auction-view',
   standalone: true,
   imports: [
-    AuctionCard
+    RouterLink
   ],
   templateUrl: './auction-view.html',
   styleUrl: './auction-view.css',
