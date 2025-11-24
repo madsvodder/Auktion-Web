@@ -8,5 +8,5 @@ export const routes: Routes = [
   {path: '', component: AuctionsPage, title: 'Auctions'},
   {path: 'create-auction', component: CreateAuctionPage, title: 'Create Auction'},
   {path: 'auctions/:id', component: AuctionView},
-  {path: 'auctions/:id/lot/:lotid', component: LotView},
+  {path: 'auctions/:id/lot/:lotnumber', component: LotView},
 ];

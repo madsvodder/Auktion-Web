@@ -51,7 +51,7 @@ export class ApiService {
     })
   }
 
-  getLot(id: number) {
-    return this.http.get<Lot>(`${this.getLotsUrl}/${id}`);
+  getLot(lotNumber: number) {
+    return this.http.get<Lot>(`${this.getLotsUrl}/${lotNumber}`);
   }
 }

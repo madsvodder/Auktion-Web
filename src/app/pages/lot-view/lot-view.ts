@@ -17,7 +17,8 @@ import {FormsModule} from '@angular/forms';
 })
 export class LotView implements OnInit {
 
-
+  auctionId!: number;
+  lotNumber!: number;
 
   public lot!: Lot;
 
@@ -27,17 +28,19 @@ export class LotView implements OnInit {
   public bidAmount: number = 1;
 
   ngOnInit() {
-    const lotNumberParam = this.route.snapshot.paramMap.get('lotid');
-    const lotNumber = lotNumberParam ? Number(lotNumberParam) : null;
+    this.auctionId = Number(this.route.snapshot.paramMap.get('id'));
+    this.lotNumber = Number(this.route.snapshot.paramMap.get('lotnumber'));
 
-    if (!lotNumber) {
-      return;
-    }
+    // Refresh lots in current auction
+    this.apiService.loadLotsFromAuction(this.auctionId);
 
-    this.apiService.getLot(lotNumber).subscribe(lot => {
-      this.lot = lot;
-    });
-  }
+    const checkLot = () => {
+      const lots = this.apiService.lots();
+      this.lot = <Lot>lots.find(l => l.lotNumber === this.lotNumber);
+    };
+
+    // run once
+    checkLot();  }
 
   bidOnLot() {
 

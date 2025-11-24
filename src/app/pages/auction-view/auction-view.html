@@ -20,8 +20,8 @@
       <img src="https://images.ctfassets.net/yb682zl7v5ka/2957544974423012041/35ee7f891e411630a2885e738657181d/maxi1.png?w=1200&h=1047&fm=webp" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title">{{ lot.title }}</h5>
-        <p class="card-text">{{ lot.description }}</p>
-        <a [routerLink]="['/lot', lot.id]" class="btn btn-primary">Go To Lot</a>
+        <p class="card-text">{{ lot.lotNumber }}</p>
+        <a [routerLink]="['/auctions', auction?.id, 'lot', lot.lotNumber]" class="btn btn-primary">Go To Lot</a>
       </div>
     </div>
   }
