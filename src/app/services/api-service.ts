@@ -50,8 +50,4 @@ export class ApiService {
       console.log(res);
     })
   }
-
-  getLot(lotNumber: number) {
-    return this.http.get<Lot>(`${this.getLotsUrl}/${lotNumber}`);
-  }
 }

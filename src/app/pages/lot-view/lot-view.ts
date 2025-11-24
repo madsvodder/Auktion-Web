@@ -34,13 +34,9 @@ export class LotView implements OnInit {
     // Refresh lots in current auction
     this.apiService.loadLotsFromAuction(this.auctionId);
 
-    const checkLot = () => {
-      const lots = this.apiService.lots();
-      this.lot = <Lot>lots.find(l => l.lotNumber === this.lotNumber);
-    };
-
-    // run once
-    checkLot();  }
+    const lots = this.apiService.lots();
+    this.lot = <Lot>lots.find(l => l.lotNumber === this.lotNumber);
+  }
 
   bidOnLot() {
 
