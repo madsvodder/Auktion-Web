@@ -3,7 +3,7 @@
 <app-sidebar></app-sidebar>
 <div class="main">
   <div class="cards">
-    @for (auction of apiService.auctions(); track auction) {
+    @for (auction of apiService.auctions(); track auction.id) {
       <!-- TITLE BURDE VÆRE ID -->
       <a [routerLink]="['/auctions', auction.id]">
         <app-auction-card [auction]="auction"></app-auction-card>

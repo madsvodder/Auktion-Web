@@ -1,7 +1,7 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {Auction} from '../../interfaces/auction';
 import {ApiService} from '../../services/api-service';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-auction-view',
@@ -16,20 +16,19 @@ export class AuctionView implements OnInit {
 
   private route = inject(ActivatedRoute);
   public apiService = inject(ApiService);
-
-  auction: Auction | null = null;
+  auction!: Auction
 
   ngOnInit() {
+
     const id = this.route.snapshot.paramMap.get('id');
 
-    if (id) {
-      this.auction = this.apiService
-        .auctions()
-        .find(a => a.id.toString() === id) ?? null;
 
-      if (this.auction) {
-        this.apiService.loadLotsFromAuction(this.auction?.id)
-      }
+    // Example – adjust to your ApiService
+    this.apiService.getAuction(id!).subscribe(auction => {
+      this.auction = auction;
+      console.log(this.auction)
+      this.apiService.loadLotsFromAuction(this.auction.id)
+    });
+
     }
-  }
 }

@@ -16,16 +16,18 @@
 
       <hr>
 
-      <div class="bidding">
+      @if (lot) {
+        <div class="bidding">
 
-        <div class="bid">
-          <label for="amount">Amount:</label>
-          <input [(ngModel)]="bidAmount" type="number" id="amount" name="amount" min="1">
-          <button (click)="bidOnLot()">Byd!</button>
+          <div class="bid">
+            <label for="amount">Amount:</label>
+            <input [(ngModel)]="bidAmount" type="number" id="amount" name="amount" min="1">
+            <button (click)="bidOnLot()">Byd!</button>
+          </div>
+
+          <app-bid-overview [lot]="lot"></app-bid-overview>
         </div>
-
-        <app-bid-overview [lot]="lot"></app-bid-overview>
-      </div>
+      }
     </div>
   </div>
 </div>

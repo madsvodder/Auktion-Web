@@ -31,18 +31,17 @@ export class LotView implements OnInit {
     this.auctionId = Number(this.route.snapshot.paramMap.get('id'));
     this.lotNumber = Number(this.route.snapshot.paramMap.get('lotnumber'));
 
-    // Refresh lots in current auction
-    this.apiService.loadLotsFromAuction(this.auctionId);
-
-    const lots = this.apiService.lots();
-    this.lot = <Lot>lots.find(l => l.lotNumber === this.lotNumber);
+    this.apiService.getLotFromAuctionId(this.auctionId, this.lotNumber).subscribe(res => {
+      this.lot = res;
+      console.log(res);
+    });
   }
 
   bidOnLot() {
 
     let placedBid: Bid = {
       lotId: this.lot!.id,
-      userId: "mads",
+      userId: 1,
       amount: this.bidAmount,
       placedAt: new Date(),
     }
