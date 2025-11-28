@@ -1,14 +1,17 @@
-import {Injectable, signal} from '@angular/core';
+import {inject, Injectable, signal} from '@angular/core';
 import {Auction} from '../interfaces/auction';
 import {HttpClient} from '@angular/common/http';
 import {Lot} from '../interfaces/lot';
 import {Bid} from '../interfaces/bid';
 import {Observable} from 'rxjs';
+import {LoginService} from './login-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
+
+  public loginService = inject(LoginService);
 
   // API Urls
   private getAuctionsUrl = "http://localhost:5264/api/Auction"
@@ -51,7 +54,10 @@ export class ApiService {
   }
 
   bidOnLot(bidInput: Bid) {
-    this.http.post(this.placeBidUrl, bidInput).subscribe({
+
+    let headers = this.loginService.getLoginHeader()
+
+    this.http.post(this.placeBidUrl, bidInput, {headers}).subscribe({
       next: res => {
         console.log('Bid placed successfully', res);
         alert("Bid placed successfully")

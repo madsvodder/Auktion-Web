@@ -5,6 +5,7 @@ import {Lot} from '../../interfaces/lot';
 import {BidOverview} from '../../components/bid-overview/bid-overview';
 import {Bid} from '../../interfaces/bid';
 import {FormsModule} from '@angular/forms';
+import {LoginService} from '../../services/login-service';
 
 @Component({
   selector: 'app-lot-view',
@@ -24,6 +25,7 @@ export class LotView implements OnInit {
 
   private route = inject(ActivatedRoute);
   public apiService = inject(ApiService);
+  public loginService = inject(LoginService);
 
   public bidAmount: number = 1;
 
@@ -41,7 +43,7 @@ export class LotView implements OnInit {
 
     let placedBid: Bid = {
       lotId: this.lot!.id,
-      userId: 1,
+      userId: this.loginService.getUserId(),
       amount: this.bidAmount,
       placedAt: new Date(),
     }

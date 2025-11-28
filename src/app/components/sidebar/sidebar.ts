@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {RouterLink} from '@angular/router';
+import {ApiService} from '../../services/api-service';
+import {LoginService} from '../../services/login-service';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,5 +12,5 @@ import {RouterLink} from '@angular/router';
   styleUrl: './sidebar.css',
 })
 export class Sidebar {
-
+  public loginService = inject(LoginService);
 }

@@ -1,0 +1,19 @@
+<p>login-page works!</p>
+
+<div class="main">
+  <div class="form-group">
+    <form [formGroup]="form" (ngSubmit)="tryLogin()">
+      <label for="username">Username</label>
+      <input formControlName="username" class="form-control" type="text" id="username">
+
+      <hr>
+
+      <label for="password">Password</label>
+      <textarea formControlName="password" class="form-control" id="password" rows="3"></textarea>
+
+      <hr>
+
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+  </div>
+</div>
