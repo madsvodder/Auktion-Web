@@ -6,6 +6,7 @@ import {BidOverview} from '../../components/bid-overview/bid-overview';
 import {Bid} from '../../interfaces/bid';
 import {FormsModule} from '@angular/forms';
 import {LoginService} from '../../services/login-service';
+import {TokenService} from '../../services/token-service';
 
 @Component({
   selector: 'app-lot-view',
@@ -27,6 +28,7 @@ export class LotView implements OnInit {
   private route = inject(ActivatedRoute);
   public apiService = inject(ApiService);
   public loginService = inject(LoginService);
+  public tokenService = inject(TokenService);
 
   public bidAmount: number = 1;
 
@@ -39,6 +41,8 @@ export class LotView implements OnInit {
       console.log(res);
       this.getHighestBid()
     });
+
+    this.tokenService.checkToken()
   }
 
   // REMEMBER TO REFRESH THIS!!!!!!

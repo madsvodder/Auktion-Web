@@ -2,29 +2,38 @@ import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {jwtDecode} from 'jwt-decode';
+import {RefreshRequestDto} from '../dto/refresh-request-dto';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TokenService {
-  public httpClient = Inject(HttpClient);
-  public router: Router = Inject(Router);
+
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   public checkToken() {
+    console.log("Checking token...");
     const loginToken = localStorage.getItem('token');
+
+    let refDto: RefreshRequestDto = {
+      token: loginToken ?? ""
+    }
+
+    console.log("REFREFREF: " + refDto.token);
+
     if (loginToken) {
       let decodedToken = jwtDecode(loginToken);
-      const isExpired: boolean = decodedToken && decodedToken.exp
-        ? decodedToken.exp < Date.now() / 1000
+      const expiresSoon: boolean = decodedToken && decodedToken.exp
+        ? decodedToken.exp - Date.now() / 1000 < 300 // 300 seconds
         : false;
 
-      if (isExpired) {
+      if (expiresSoon) {
         console.log("Token expired!")
-        this.httpClient.post('http://localhost:5264/refresh', loginToken).subscribe({
-          next: (res: string) => {
+        this.httpClient.post<RefreshRequestDto>('http://localhost:5264/api/Auth/refresh', refDto).subscribe({
+          next: (res) => {
 
             // Set the new token!
-            localStorage.setItem('token', res);
+            localStorage.setItem('token', res.token);
 
           },
           error: () => {
