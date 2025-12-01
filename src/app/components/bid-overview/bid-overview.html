@@ -1,5 +1,10 @@
-<div>
-  @for (bid of apiService.bidsInCurrentLot(); track bid.id) {
-    <p>{{ bid.userId }} - {{ bid.amount }}</p>
+<div class="main">
+  @for (bid of apiService.bidsInCurrentLot().slice(0, 5); track bid.id) {
+
+    <div class="bid">
+      <p>{{ bid.username }} - {{ bid.amount }} kr.</p>
+      <p>{{ bid.placedAt | date:'h:mm:ss - MMM d' }}</p>
+    </div>
+
   }
 </div>

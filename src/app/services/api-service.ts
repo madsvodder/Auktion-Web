@@ -5,6 +5,7 @@ import {Lot} from '../interfaces/lot';
 import {Bid} from '../interfaces/bid';
 import {Observable} from 'rxjs';
 import {LoginService} from './login-service';
+import {BidDto} from '../dto/bid-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -21,11 +22,12 @@ export class ApiService {
   private placeBidUrl = "http://localhost:5264/api/Bid"
   private getLotFromAuctionIdUrl = "http://localhost:5264/api/Lot/"
   private getAuctionUrl = "http://localhost:5264/api/Auction/"
+  private getHighestBidUrl = "http://localhost:5264/api/Bid/lot/"
 
   // Lists
   auctions = signal<Auction[]>([]);
   lots = signal<Lot[]>([]);
-  bidsInCurrentLot = signal<Bid[]>([]);
+  bidsInCurrentLot = signal<BidDto[]>([]);
 
   constructor(private http: HttpClient) {}
 
@@ -48,9 +50,9 @@ export class ApiService {
   }
 
   loadBidsFromLot(lotId: number) {
-    this.http.get<Bid[]>(this.getBidsFromLotUrl + lotId).subscribe(res => {
+    this.http.get<BidDto[]>(this.getBidsFromLotUrl + lotId).subscribe(res => {
       this.bidsInCurrentLot.set(res);
-    })
+    });
   }
 
   bidOnLot(bidInput: Bid) {
@@ -82,4 +84,9 @@ export class ApiService {
     );
   }
 
+  getHighestBid(lotId: number) {
+    return this.http.get<Bid>(
+      this.getHighestBidUrl + lotId + "/highest"
+    )
+  }
 }

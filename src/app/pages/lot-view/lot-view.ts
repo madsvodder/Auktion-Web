@@ -18,8 +18,9 @@ import {LoginService} from '../../services/login-service';
 })
 export class LotView implements OnInit {
 
-  auctionId!: number;
-  lotNumber!: number;
+  public auctionId!: number;
+  public lotNumber!: number;
+  public highestBid?: number;
 
   public lot!: Lot;
 
@@ -36,7 +37,27 @@ export class LotView implements OnInit {
     this.apiService.getLotFromAuctionId(this.auctionId, this.lotNumber).subscribe(res => {
       this.lot = res;
       console.log(res);
+      this.getHighestBid()
     });
+  }
+
+  // REMEMBER TO REFRESH THIS!!!!!!
+  getHighestBid() {
+    this.apiService.getHighestBid(this.lot.id).subscribe({
+        next: res => {
+
+          if (res.amount === null || res.amount === 0) {
+            this.highestBid = this.lot.startingPrice;
+          } else {
+            this.highestBid = res.amount + 1
+            console.log("Highest BID", this.highestBid)
+          }
+        },
+        error: error => {
+          this.highestBid = this.lot.startingPrice;
+        }
+      }
+    );
   }
 
   bidOnLot() {

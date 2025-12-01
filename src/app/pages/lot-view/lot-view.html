@@ -21,7 +21,7 @@
 
           <div class="bid">
             <label for="amount">Amount:</label>
-            <input [(ngModel)]="bidAmount" type="number" id="amount" name="amount" min="1">
+            <input [(ngModel)]="bidAmount" value="{{highestBid}}" type="number" id="amount" name="amount" min="{{highestBid}}">
             <button (click)="bidOnLot()">Byd!</button>
           </div>
 
