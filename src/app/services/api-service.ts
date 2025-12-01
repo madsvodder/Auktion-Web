@@ -59,17 +59,7 @@ export class ApiService {
 
     let headers = this.loginService.getLoginHeader()
 
-    this.http.post(this.placeBidUrl, bidInput, {headers}).subscribe({
-      next: res => {
-        console.log('Bid placed successfully', res);
-        alert("Bid placed successfully")
-      },
-      error: (err) => {
-        console.log(err); // full error object
-
-        alert(err.error.message);
-      }
-    });
+    return this.http.post(this.placeBidUrl, bidInput, {headers})
   }
 
   getLotFromAuctionId(auctionId: number, lotNumber: number): Observable<Lot> {

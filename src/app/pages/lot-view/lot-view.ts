@@ -69,6 +69,13 @@ export class LotView implements OnInit {
       placedAt: new Date(),
     }
 
-    this.apiService.bidOnLot(placedBid)
+    this.apiService.bidOnLot(placedBid).subscribe({
+      next: res => {
+        alert("Bid placed successfully")
+      },
+      error: (err) => {
+        alert("Please login!");
+      }
+    });
   }
 }

@@ -9,7 +9,6 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-create-auctions-page',
   imports: [
-    RouterLink,
     FormsModule,
     ReactiveFormsModule
   ],
@@ -51,9 +50,5 @@ export class CreateAuctionPage {
         alert('Noget gik galt med din auktion.');
       }
     });
-
-
-    alert('Auction created!')
-
   }
 }
