@@ -1,91 +1,36 @@
-<div class="auction-page">
-  <!-- Auction header / hero -->
-  <section class="auction-hero">
-    <div class="auction-header">
-      <div>
-        <p class="auction-label">Online Auction</p>
-        <h1 class="auction-title">{{ auction?.title }}</h1>
-        <p class="auction-subtitle">
-          Eksklusiv moderne auktion.
-        </p>
-      </div>
+<div>
+  <div id="lot-info">
 
-      @if (loginService.isAdmin()) {
-        <a [routerLink]="['/create-lot', auction?.id]" class="btn btn-primary create-lot-btn">
-          + Create Lot
-        </a>
-      }
-    </div>
+    @if (loginService.isAdmin()) {
+      <a [routerLink]="['/create-lot', auction.id]">
+        <button type="button" class="btn btn-primary">Create Lot</button>
+      </a>
 
-    <div class="auction-meta">
-      <div class="meta-item">
-        <span class="meta-label">Beskrivelse</span>
-        <p class="meta-value">
-          {{ auction?.description || 'Ingen beskrivelse tilgængelig.' }}
-        </p>
-      </div>
+    }
 
-      <div class="meta-item">
-        <span class="meta-label">Auktionen slutter</span>
-        <p class="meta-value date">
-          {{ auction?.endDate }}
-        </p>
-      </div>
-    </div>
-  </section>
+    <h3 id="title">{{ auction?.title }}</h3>
 
-  <!-- Lots grid -->
-  <section class="lots-section">
-    <div class="lots-header">
-      <div>
-        <h2>Lots i denne auktion</h2>
-        <p class="lots-subtitle">
-          Udforsk alle varer i auktionen.
-        </p>
+    <hr>
+
+    <h5>Beskrivelse</h5>
+    <p>{{ auction?.description }}</p>
+
+    <hr>
+
+    <h5>Auktionen slutter</h5>
+    <p>{{ auction?.endDate }}</p>
+  </div>
+</div>
+
+<div class="cards">
+  @for (lot of apiService.lots(); track lot.lotNumber) {
+    <div class="card" style="width: 18rem;">
+      <img src="https://images.ctfassets.net/yb682zl7v5ka/2957544974423012041/35ee7f891e411630a2885e738657181d/maxi1.png?w=1200&h=1047&fm=webp" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{ lot.title }}</h5>
+        <p class="card-text">{{ lot.lotNumber }}</p>
+        <a [routerLink]="['/auctions', auction?.id, 'lot', lot.lotNumber]" class="btn btn-primary">Go To Lot</a>
       </div>
     </div>
-
-    <div class="lot-grid">
-      @for (lot of apiService.lots(); track lot.lotNumber) {
-        <article class="lot-card">
-          <div class="lot-image-wrapper">
-            <img
-              src="https://images.ctfassets.net/yb682zl7v5ka/2957544974423012041/35ee7f891e411630a2885e738657181d/maxi1.png?w=1200&h=1047&fm=webp"
-              class="lot-img"
-              alt="Lot billede"
-            />
-            <span class="lot-badge">Lot #{{ lot.lotNumber }}</span>
-          </div>
-
-          <div class="lot-content">
-            <h3 class="lot-title">{{ lot.title }}</h3>
-
-            <p class="lot-description">
-              {{ lot.description || 'Ingen beskrivelse tilgængelig.' }}
-            </p>
-
-            <div class="lot-prices">
-              <div>
-                <span class="price-label">Startpris</span>
-                <p class="price-value">{{ lot.startingPrice }}</p>
-              </div>
-              <div>
-                <span class="price-label">Vurdering</span>
-                <p class="price-value muted">{{ lot.estimatedPrice }}</p>
-              </div>
-            </div>
-
-            <div class="lot-actions">
-              <a
-                [routerLink]="['/auctions', auction?.id, 'lot', lot.lotNumber]"
-                class="btn btn-primary"
-              >
-                Gå til lot
-              </a>
-            </div>
-          </div>
-        </article>
-      }
-    </div>
-  </section>
+  }
 </div>

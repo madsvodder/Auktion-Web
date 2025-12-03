@@ -1,77 +1,34 @@
-<div class="lot-page">
-  <header class="lot-header">
-    <p class="lot-label">Lot</p>
-    <h1 class="lot-title">{{ lot?.title }}</h1>
+<div class="main">
 
-    @if (lot?.lotNumber) {
-      <p class="lot-subtitle">Lot nr. {{ lot?.lotNumber }}</p>
-    }
-  </header>
+  <h1>{{ lot?.title }}</h1>
 
-  <section class="lot-layout">
-    <!-- LEFT: placeholder image area -->
-    <div class="lot-images">
-      <div class="image-placeholder">
-        <div class="placeholder-content">
-          <div class="placeholder-icon">📷</div>
-          <h3>Billeder kommer snart</h3>
-          <p>
-            Dette lot får snart rigtige billeder. Indtil da kan du læse
-            beskrivelsen og afgive bud.
-          </p>
-        </div>
-      </div>
+  <div class="data">
+    <div class="images">
+
     </div>
 
-    <!-- RIGHT: info + bidding -->
-    <div class="lot-info">
-      <section class="lot-meta">
-        <h4>Beskrivelse</h4>
-        <p class="lot-description">
-          {{ lot?.description || 'Ingen beskrivelse tilgængelig.' }}
-        </p>
-      </section>
+    <div class="info">
+      <div class="meta">
+        <h4> Lot nr. {{ lot?.lotNumber }}</h4>
+        <hr>
+        <p>{{ lot?.description }}</p>
+      </div>
+
+      <hr>
 
       @if (lot) {
-        <section class="lot-bidding">
-          <div class="bidding-header">
-            <div>
-              <p class="bidding-label">Aktuelt højeste bud</p>
-              <p class="bidding-amount">{{ highestBid }} kr.</p>
-            </div>
+        <div class="bidding">
+
+          <div class="bid">
+            <label for="amount">Amount:</label>
+            <input [(ngModel)]="bidAmount" value="{{highestBid}}" type="number" id="amount" name="amount" min="{{highestBid}}">
+            <button (click)="bidOnLot()">Byd!</button>
           </div>
 
-          <div class="bid-form">
-            <label for="amount">Dit bud</label>
-            <div class="bid-input-row">
-              <input
-                [(ngModel)]="bidAmount"
-                value="{{highestBid}}"
-                type="number"
-                id="amount"
-                name="amount"
-                min="{{highestBid}}"
-                class="bid-input"
-              />
-              <button
-                type="button"
-                class="btn btn-primary"
-                (click)="bidOnLot()"
-              >
-                Byd
-              </button>
-            </div>
-            <p class="bid-hint">
-              Dit bud skal mindst være {{ highestBid }} kr. eller højere.
-            </p>
-          </div>
-
-          <!-- Your overview component: now styled to sit nicely under the form -->
-          <div class="bid-overview-card">
-            <app-bid-overview [lot]="lot"></app-bid-overview>
-          </div>
-        </section>
+          <app-bid-overview [lot]="lot"></app-bid-overview>
+        </div>
       }
     </div>
-  </section>
+  </div>
 </div>
+
