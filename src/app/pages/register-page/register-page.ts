@@ -19,8 +19,8 @@ export class RegisterPage {
   private router = inject(Router);
 
   // Form
-  registerForm: FormGroup = this.fb.group({
-    username: ['', [Validators.required, Validators.minLength(3)]],
+  registerForm = this.fb.group({
+    email: ['', [Validators.required, Validators.minLength(3)]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
@@ -29,9 +29,9 @@ export class RegisterPage {
   successMessage = '';
   isLoading = false;
 
-  // Getters til HTML (Angular 17+ anbefaler dette)
-  get username() {
-    return this.registerForm.get('username');
+  // Getters til HTML
+  get email() {
+    return this.registerForm.get('email');
   }
 
   get password() {
@@ -39,16 +39,23 @@ export class RegisterPage {
   }
 
   onRegister() {
-    if (!this.registerForm.valid) return;
+
+    if (!this.registerForm.valid) {
+      console.log('Form is invalid');
+      return;
+    }
 
     this.isLoading = true;
     this.errorMessage = '';
     this.successMessage = '';
 
     const user = {
-      email: this.username?.value,
+      email: this.email?.value,
       password: this.password?.value,
+      role: 'user',
     };
+
+    console.log('User to register:', user);
 
     this.loginService.register(user).subscribe({
       next: () => {
@@ -63,4 +70,5 @@ export class RegisterPage {
       },
     });
   }
+
 }

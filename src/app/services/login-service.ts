@@ -14,7 +14,11 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  register(user: User): Observable<User>{
+  register(user: {
+    email: string | null | undefined;
+    password: string | null | undefined;
+    role: string
+  }): Observable<User>{
     return this.http.post<User>(this.RegisterUrl, user)
   }
 
