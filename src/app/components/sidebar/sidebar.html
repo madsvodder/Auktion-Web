@@ -5,6 +5,7 @@
   }
 
   @if (!loginService.isLoggedIn()) {
+    <button type="button" class="btn btn-primary" routerLink="/register">Opret Bruger</button>
     <button type="button" class="btn btn-primary" routerLink="/login">Login</button>
   }
 </div>

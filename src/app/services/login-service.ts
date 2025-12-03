@@ -10,8 +10,13 @@ import {LoginResponse} from '../interfaces/login-response';
 export class LoginService {
 
   private LoginUrl: string = "http://localhost:5264/api/Auth/login"
+  private RegisterUrl: string = "http://localhost:5264/api/User"
 
   constructor(private http: HttpClient) { }
+
+  register(user: User): Observable<User>{
+    return this.http.post<User>(this.RegisterUrl, user)
+  }
 
   onLogin(user: User){
     return this.http.post<LoginResponse>(this.LoginUrl, user)

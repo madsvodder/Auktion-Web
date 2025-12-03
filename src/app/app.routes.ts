@@ -4,13 +4,13 @@ import {CreateAuctionPage} from './pages/create-auctions-page/create-auction-pag
 import {AuctionView} from './pages/auction-view/auction-view';
 import {LotView} from './pages/lot-view/lot-view';
 import {LoginPage} from './pages/login-page/login-page';
-import {CreateLotPage} from './pages/create-lot-page/create-lot-page';
 
 export const routes: Routes = [
   {path: '', component: AuctionsPage, title: 'Auctions'},
   {path: 'create-auction', component: CreateAuctionPage, title: 'Create Auction'},
   {path: 'create-lot/:id', component: CreateLotPage, title: 'Create Lot'},
   {path: 'login', component: LoginPage, title: 'Login'},
+  {path: 'register', component: RegisterPage, title: 'Register'},
   {path: 'auctions/:id', component: AuctionView},
   {path: 'auctions/:id/lot/:lotnumber', component: LotView},
 ];

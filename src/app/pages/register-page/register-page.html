@@ -1,0 +1,84 @@
+<div class="register-container">
+  <div class="register-card">
+    <h2>Opret Bruger</h2>
+
+    <form (ngSubmit)="onRegister()" [formGroup]="registerForm">
+
+      <!-- Brugernavn -->
+      <div class="form-group">
+        <label for="username">Brugernavn:</label>
+        <input
+          type="text"
+          id="username"
+          class="form-control"
+          formControlName="username"
+          placeholder="Vælg dit brugernavn"
+          [disabled]="isLoading"
+        >
+
+        @if (username && username.errors && username.touched) {
+          @if (username.hasError('required')) {
+            <small class="text-danger">Brugernavn er påkrævet</small>
+          }
+          @if (username.hasError('minlength')) {
+            <small class="text-danger">Brugernavn skal være mindst 3 tegn</small>
+          }
+        }
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Adgangskode:</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          formControlName="password"
+          placeholder="Vælg din adgangskode"
+          [disabled]="isLoading"
+        >
+
+        @if (password && password.errors && password.touched) {
+          @if (password.hasError('required')) {
+            <small class="text-danger">Adgangskode er påkrævet</small>
+          }
+          @if (password.hasError('minlength')) {
+            <small class="text-danger">Adgangskode skal være mindst 6 tegn</small>
+          }
+        }
+      </div>
+
+      <!-- Error -->
+      @if (errorMessage) {
+        <div class="alert alert-danger">
+          {{ errorMessage }}
+        </div>
+      }
+
+      <!-- Success -->
+      @if (successMessage) {
+        <div class="alert alert-success">
+          {{ successMessage }}
+        </div>
+      }
+
+      <!-- Submit knap -->
+      <button
+        type="submit"
+        class="btn btn-primary w-100"
+        [disabled]="!registerForm.valid || isLoading"
+      >
+        @if (isLoading) {
+          <span>Opretter bruger...</span>
+        } @else {
+          <span>Opret Bruger</span>
+        }
+      </button>
+    </form>
+
+    <p class="text-center mt-3">
+      Har du allerede en konto?
+      <a routerLink="/login">Log ind her</a>
+    </p>
+  </div>
+</div>
