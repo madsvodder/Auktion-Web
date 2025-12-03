@@ -14,6 +14,8 @@ export class ApiService {
 
   public loginService = inject(LoginService);
 
+  public headers = this.loginService.getLoginHeader()
+
   // API Urls
   private getAuctionsUrl = "http://localhost:5264/api/Auction"
   private getLotsUrl = "http://localhost:5264/api/Lot"

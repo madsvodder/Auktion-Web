@@ -1,5 +1,13 @@
 <div>
   <div id="lot-info">
+
+    @if (loginService.isAdmin()) {
+      <a [routerLink]="['/create-lot', auction.id]">
+        <button type="button" class="btn btn-primary">Create Lot</button>
+      </a>
+
+    }
+
     <h3 id="title">{{ auction?.title }}</h3>
 
     <hr>

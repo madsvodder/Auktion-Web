@@ -1,0 +1,29 @@
+<p>create-lot-page works!</p>
+
+<div class="main">
+  <div class="form-group">
+    <form [formGroup]="form" (ngSubmit)="createLot()">
+      <label for="title">Title</label>
+      <input formControlName="title" class="form-control" type="text" id="title">
+
+      <hr>
+
+      <label for="description">Description</label>
+      <textarea formControlName="description" class="form-control" id="description" rows="3"></textarea>
+
+      <hr>
+
+      <label for="starPrice">Starting price</label>
+      <input class="form-control" type="number" id="startPrice">
+
+      <hr>
+
+      <label for="estimatedPrice">estimated price</label>
+      <input class="form-control" type="number" id="estimatedPrice">
+
+      <hr>
+
+      <button type="submit" class="btn btn-primary">Create Auction</button>
+    </form>
+  </div>
+</div>
