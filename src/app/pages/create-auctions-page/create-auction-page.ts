@@ -1,10 +1,11 @@
-import {Component, inject} from '@angular/core';
+import {Component, Inject, inject} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {ApiService} from '../../services/api-service';
 import {Auction} from '../../interfaces/auction';
 import {Router} from '@angular/router';
+import {LoginService} from '../../services/login-service';
 
 @Component({
   selector: 'app-create-auctions-page',
@@ -20,6 +21,7 @@ export class CreateAuctionPage {
   apiUrl: string = "http://localhost:5264/api/Auction"
 
   private router = inject(Router);
+  private loginService = inject(LoginService);
 
   constructor(private http: HttpClient, public apiService: ApiService) {}
 
@@ -40,7 +42,9 @@ export class CreateAuctionPage {
       endDate: new Date(),
     }
 
-    this.http.post(this.apiUrl, newAuction).subscribe({
+    let headers = this.loginService.getLoginHeader()
+
+    this.http.post(this.apiUrl, newAuction, {headers}).subscribe({
       next: (res) => {
         console.log('Auction created successfully:', res);
         this.router.navigate(['/']).then(r => alert(r));

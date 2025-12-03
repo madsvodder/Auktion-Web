@@ -6,7 +6,7 @@ export interface Lot {
   title: string,
   description: string,
   startingPrice: number,
-  endingPrice: number,
+  endingPrice?: number,
   estimatedPrice: number,
   auctionId: number,
 }

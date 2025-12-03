@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AuctionCard} from '../../components/auction-card/auction-card';
 import {Sidebar} from '../../components/sidebar/sidebar';
 import {ApiService} from '../../services/api-service';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
+import {LoginService} from '../../services/login-service';
 
 @Component({
   selector: 'app-auctions-page',
@@ -16,7 +17,7 @@ import {RouterLink} from '@angular/router';
 })
 export class AuctionsPage implements OnInit {
 
-  constructor(public apiService: ApiService) {
+  constructor(public apiService: ApiService, public loginService: LoginService, public router: Router) {
   }
 
   // When we load this page, we also load all the aucitons
