@@ -6,6 +6,7 @@ import {LotView} from './pages/lot-view/lot-view';
 import {LoginPage} from './pages/login-page/login-page';
 import {CreateLotPage} from './pages/create-lot-page/create-lot-page';
 import {RegisterPage} from './pages/register-page/register-page';
+import {WonLotsPage} from './pages/won-lots-page/won-lots-page';
 
 export const routes: Routes = [
   {path: '', component: AuctionsPage, title: 'Auctions'},
@@ -15,4 +16,5 @@ export const routes: Routes = [
   {path: 'register', component: RegisterPage, title: 'Register'},
   {path: 'auctions/:id', component: AuctionView},
   {path: 'auctions/:id/lot/:lotnumber', component: LotView},
+  { path: 'users/:id/won-lots', component: WonLotsPage }
 ];

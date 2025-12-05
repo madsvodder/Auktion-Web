@@ -17,6 +17,7 @@ export class ApiService {
   public headers = this.loginService.getLoginHeader()
 
   // API Urls
+  private baseUrl = "http://localhost:5264/api"
   private getAuctionsUrl = "http://localhost:5264/api/Auction"
   private getLotsUrl = "http://localhost:5264/api/Lot"
   private getLotsFromAuctionUrl = "http://localhost:5264/api/Lot/auction/"
@@ -37,6 +38,10 @@ export class ApiService {
     this.http.get<Auction[]>(this.getAuctionsUrl).subscribe(res => {
       this.auctions.set(res);
     });
+  }
+
+  getWonLots(userId: number): Observable<Lot[]> {
+    return this.http.get<Lot[]>(`${this.baseUrl}/user/${userId}/won-lots`);
   }
 
   loadAllLots() {

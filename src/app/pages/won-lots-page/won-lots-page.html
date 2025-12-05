@@ -1,0 +1,43 @@
+<div class="won-lots">
+  <h2>Vundne lots</h2>
+
+  @if (loading) {
+    <div>Henter data...</div>
+  }
+
+  @if (error) {
+    <div class="error">{{ error }}</div>
+  }
+
+  @if (!loading && !error && lots.length === 0) {
+    <div>Du har ikke vundet nogen lots endnu.</div>
+  }
+
+  @if (!loading && !error && lots.length > 0) {
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Lot nr.</th>
+        <th>Titel</th>
+        <th>Estimeret pris</th>
+        <th>Slutpris</th>
+        <th>Auktions-ID</th>
+      </tr>
+      </thead>
+
+      <tbody>
+        @for (lot of lots; track lot.id) {
+          <tr>
+            <td>{{ lot.lotNumber }}</td>
+            <td>{{ lot.title }}</td>
+            <td>{{ lot.estimatedPrice | number: '1.0-2' }} kr.</td>
+            <td>
+              {{ lot.endingPrice != null ? (lot.endingPrice | number: '1.0-2') + ' kr.' : '-' }}
+            </td>
+            <td>{{ lot.auctionId }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

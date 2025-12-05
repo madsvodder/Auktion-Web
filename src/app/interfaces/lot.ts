@@ -9,4 +9,5 @@ export interface Lot {
   endingPrice?: number,
   estimatedPrice: number,
   auctionId: number,
+  winnerUserId?: number;
 }
