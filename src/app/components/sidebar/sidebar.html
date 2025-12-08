@@ -1,16 +1,38 @@
 <div class="sidenav">
 
-  @if (loginService.isAdmin()) {
-    <button type="button" class="btn btn-primary" routerLink="/create-auction">Create Auction</button>
-  }
+  <div class="logo">
+    <a routerLink="/">
+      <img src="https://gcdnb.pbrd.co/images/VPNPpP04EtPB.jpg?o=1" alt="Logo">
+    </a>
+  </div>
 
-  @if (!loginService.isLoggedIn()) {
-    <button type="button" class="btn btn-primary" routerLink="/register">Opret Bruger</button>
-    <button type="button" class="btn btn-primary" routerLink="/login">Log ind</button>
-  }
+  <div class="nav-buttons">
+    @if (loginService.isAdmin()) {
+      <button type="button" class="btn nav-btn" routerLink="/create-auction">
+        Create Auction
+      </button>
+    }
 
-  @if (loginService.isLoggedIn()) {
-    <button type="button" class="btn btn-primary" [routerLink]="['/users', loginService.getUserId(), 'won-lots']">Mine lots</button>
-    <button type="button" (click)="logOut()" class="btn btn-primary">Log ud</button>
-  }
+    @if (!loginService.isLoggedIn()) {
+      <button type="button" class="btn nav-btn" routerLink="/register">
+        Opret Bruger
+      </button>
+      <button type="button" class="btn nav-btn" routerLink="/login">
+        Log ind
+      </button>
+    }
+
+    @if (loginService.isLoggedIn()) {
+      <button
+        type="button"
+        class="btn nav-btn"
+        [routerLink]="['/users', loginService.getUserId(), 'won-lots']">
+        Mine lots
+      </button>
+
+      <button type="button" (click)="logOut()" class="btn nav-btn">
+        Log ud
+      </button>
+    }
+  </div>
 </div>

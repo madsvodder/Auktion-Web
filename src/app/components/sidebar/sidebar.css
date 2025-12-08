@@ -1,10 +1,89 @@
 .sidenav {
-  height: 100%;
-  width: 200px;
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  top: 0; /* Stay at the top */
+  height: 100vh;
+  width: 240px;
+  position: fixed;
+  top: 0;
   left: 0;
-  background-color: #f0f0f0;
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding: 20px;
+
+  background: linear-gradient(180deg, #1e293b, #0f172a);
+  color: #f9fafb;
+
+  padding: 24px 18px;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.18);
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Logo area */
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.logo img {
+  max-width: 140px;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* Buttons container */
+.nav-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Base nav button style */
+.nav-btn {
+  width: 100%;
+  text-align: left;
+
+  background: rgba(148, 163, 184, 0.16);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  color: #e5e7eb;
+
+  padding: 0.6rem 0.9rem;
+  border-radius: 10px;
+
+  font-size: 0.95rem;
+  font-weight: 500;
+
+  transition:
+    background 0.18s ease,
+    transform 0.12s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+/* Remove Bootstrap’s strong blue if btn-primary is applied globally */
+.nav-btn.btn-primary {
+  background: rgba(148, 163, 184, 0.16);
+  border-color: rgba(148, 163, 184, 0.35);
+}
+
+/* Hover / focus effects */
+.nav-btn:hover,
+.nav-btn:focus-visible {
+  background: rgba(59, 130, 246, 0.25);
+  border-color: rgba(59, 130, 246, 0.6);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+  transform: translateY(-1px);
+  color: #f9fafb;
+}
+
+/* Active / clicked */
+.nav-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Optional: make text non-selectable for a cleaner feel */
+.sidenav,
+.sidenav * {
+  user-select: none;
 }
