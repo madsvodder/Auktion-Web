@@ -31,6 +31,7 @@ export class CreateAuctionPage {
   form = this.fb.group({
     title: this.fb.control(''),
     description: this.fb.control(''),
+    endDate: this.fb.control(''),
   })
 
   createAuction() {
@@ -39,7 +40,7 @@ export class CreateAuctionPage {
       title: this.form.value.title ?? '',
       description: this.form.value.description ?? '',
       startDate: new Date(),
-      endDate: new Date(),
+      endDate: this.form.value.endDate ? new Date(this.form.value.endDate) : new Date(),
     }
 
     let headers = this.loginService.getLoginHeader()

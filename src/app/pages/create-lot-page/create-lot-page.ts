@@ -43,9 +43,22 @@ export class CreateLotPage implements OnInit {
     description: this.fb.control(''),
     estimatedPrice: this.fb.control(0),
     startingPrice: this.fb.control(0),
+    endTime: this.fb.control(''),
   });
 
   createLot() {
+
+    let finalTime: Date;
+
+    if (this.form.value.endTime) {
+      // rawEnd: "2025-12-08T21:30"
+      const local = new Date(this.form.value.endTime);
+      // Remove timezone offset so 21:30 stays 21:30 when serialized as UTC
+      finalTime = new Date(local.getTime() - local.getTimezoneOffset() * 60000);
+    } else {
+      finalTime = new Date();
+    }
+
     let newLot: Lot = {
       id: 0,
       lotNumber: 0,
@@ -54,6 +67,8 @@ export class CreateLotPage implements OnInit {
       startingPrice: this.form.value.startingPrice ?? 0,
       estimatedPrice: this.form.value.estimatedPrice ?? 0,
       auctionId: Number(this.auctionId),
+      endTime: this.form.value.endTime ? finalTime : new Date(),
+      isClosed: false,
     }
 
     let headers = this.loginService.getLoginHeader()

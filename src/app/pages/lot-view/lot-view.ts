@@ -19,6 +19,10 @@ import {TokenService} from '../../services/token-service';
 })
 export class LotView implements OnInit {
 
+  // Countdown!
+  countdown: string = '';
+  private countdownIntervalId: any;
+
   public auctionId!: number;
   public lotNumber!: number;
   public highestBid?: number;
@@ -46,6 +50,7 @@ export class LotView implements OnInit {
       this.lot = res;
       console.log(res);
       this.getHighestBid()
+      this.startCountdown();
     });
 
     this.tokenService.checkToken()
@@ -90,5 +95,38 @@ export class LotView implements OnInit {
         alert("Please login!");
       }
     });
+  }
+
+  private startCountdown() {
+    if (!this.lot?.endTime) return;
+
+    const endTimeMs = new Date(this.lot.endTime).getTime();
+
+    // run once immediately
+    this.updateCountdown(endTimeMs);
+
+    // then every second
+    this.countdownIntervalId = setInterval(() => {
+      this.updateCountdown(endTimeMs);
+    }, 1000);
+  }
+
+  private updateCountdown(endTimeMs: number) {
+    const now = Date.now();
+    const diff = endTimeMs - now;
+
+    if (diff <= 0) {
+      this.countdown = 'Auktionen er slut';
+      if (this.countdownIntervalId) {
+        clearInterval(this.countdownIntervalId);
+      }
+      return;
+    }
+
+    const hours = Math.floor(diff / 3_600_000);
+    const minutes = Math.floor((diff % 3_600_000) / 60_000);
+    const seconds = Math.floor((diff % 60_000) / 1000);
+
+    this.countdown = `${hours}t ${minutes}m ${seconds}s`;
   }
 }

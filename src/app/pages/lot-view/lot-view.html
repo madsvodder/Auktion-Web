@@ -3,6 +3,12 @@
   <h1>{{ lot?.title }}</h1>
 
   <div class="data">
+
+    <div class="countdown" *ngIf="countdown">
+      <h3>Time left:</h3>
+      <p>{{ countdown }}</p>
+    </div>
+
     <div class="images">
 
       @if (lot?.images?.length) {
@@ -39,11 +45,18 @@
         <h4> Lot nr. {{ lot?.lotNumber }}</h4>
         <hr>
         <p>{{ lot?.description }}</p>
+
+        @if (lot?.endTime && countdown) {
+          <div class="countdown">
+            <h3>Tilbageværende tid:</h3>
+            <p>{{ countdown }}</p>
+          </div>
+        }
       </div>
 
       <hr>
 
-      @if (lot) {
+      @if (lot && !lot.isClosed) {
         <div class="bidding">
 
           <div class="bid">

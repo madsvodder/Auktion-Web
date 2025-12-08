@@ -12,4 +12,6 @@ export interface Lot {
   auctionId: number,
   winnerUserId?: number;
   images?: LotImage[];
+  endTime: Date,
+  isClosed: boolean,
 }
