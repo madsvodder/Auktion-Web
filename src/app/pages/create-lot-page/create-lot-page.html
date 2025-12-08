@@ -23,6 +23,18 @@
 
       <hr>
 
+      <div class="mb-3">
+        <label for="images" class="form-label">Billeder</label>
+        <input
+          id="images"
+          type="file"
+          multiple
+          class="form-control"
+          (change)="onFilesSelected($event)">
+      </div>
+
+      <hr>
+
       <button type="submit" class="btn btn-primary">Create Auction</button>
     </form>
   </div>

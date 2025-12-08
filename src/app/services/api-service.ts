@@ -6,6 +6,7 @@ import {Bid} from '../interfaces/bid';
 import {Observable} from 'rxjs';
 import {LoginService} from './login-service';
 import {BidDto} from '../dto/bid-dto';
+import {LotImage} from '../interfaces/lot-image';
 
 @Injectable({
   providedIn: 'root',
@@ -85,5 +86,17 @@ export class ApiService {
     return this.http.get<Bid>(
       this.getHighestBidUrl + lotId + "/highest"
     )
+  }
+
+  uploadImages(lotId: number, files: FileList | File[]): Observable<LotImage[]> {
+    const formData = new FormData();
+
+    if (files instanceof FileList) {
+      Array.from(files).forEach(file => formData.append('files', file));
+    } else {
+      files.forEach(file => formData.append('files', file));
+    }
+
+    return this.http.post<LotImage[]>(`${this.baseUrl}/lot/${lotId}/images`, formData);
   }
 }

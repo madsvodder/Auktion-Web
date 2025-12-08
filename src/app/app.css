@@ -1,0 +1,21 @@
+.main {
+  display: flex;
+  flex-direction: row;    /* ⬅ put sidebar and content side-by-side */
+  min-height: 100vh;      /* full height */
+}
+
+/* Sidebar column */
+.sidebar {
+  flex: 0 0 240px;        /* fixed width ~240px */
+  max-width: 240px;
+  border-right: 1px solid #ddd;
+  background: #f8f8f8;
+}
+
+/* Main content area */
+.content {
+  flex: 1 1 auto;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  overflow: auto;
+}

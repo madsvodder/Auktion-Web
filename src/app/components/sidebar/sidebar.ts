@@ -1,7 +1,7 @@
-import {Component, inject} from '@angular/core';
-import {RouterLink} from '@angular/router';
-import {ApiService} from '../../services/api-service';
-import {LoginService} from '../../services/login-service';
+import { Component, inject } from '@angular/core';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { LoginService } from '../../services/login-service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,4 +13,11 @@ import {LoginService} from '../../services/login-service';
 })
 export class Sidebar {
   public loginService = inject(LoginService);
+  private router = inject(Router);
+
+  public logOut() {
+    this.router.navigate(['/login']);
+    // Clear local storage
+    localStorage.clear()
+  }
 }

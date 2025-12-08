@@ -23,7 +23,7 @@ export class LotView implements OnInit {
   public lotNumber!: number;
   public highestBid?: number;
 
-  public lot!: Lot;
+  lot: Lot | null = null;
 
   private route = inject(ActivatedRoute);
   public apiService = inject(ApiService);
@@ -31,6 +31,12 @@ export class LotView implements OnInit {
   public tokenService = inject(TokenService);
 
   public bidAmount: number = 1;
+
+  selectedImage: string | null = null;
+
+  selectImage(url: string) {
+    this.selectedImage = url;
+  }
 
   ngOnInit() {
     this.auctionId = Number(this.route.snapshot.paramMap.get('id'));
@@ -47,22 +53,25 @@ export class LotView implements OnInit {
 
   // REMEMBER TO REFRESH THIS!!!!!!
   getHighestBid() {
-    this.apiService.getHighestBid(this.lot.id).subscribe({
-        next: res => {
+    if (!this.lot) {
+      return;
+    }
 
-          if (res.amount === null || res.amount === 0) {
-            this.highestBid = this.lot.startingPrice;
-          } else {
-            this.highestBid = res.amount + 1
-            console.log("Highest BID", this.highestBid)
-          }
-        },
-        error: error => {
-          this.highestBid = this.lot.startingPrice;
+    this.apiService.getHighestBid(this.lot.id).subscribe({
+      next: res => {
+        if (res.amount === null || res.amount === 0) {
+          this.highestBid = this.lot!.startingPrice;
+        } else {
+          this.highestBid = res.amount + 1;
+          console.log('Highest BID', this.highestBid);
         }
+      },
+      error: () => {
+        this.highestBid = this.lot!.startingPrice;
       }
-    );
+    });
   }
+
 
   bidOnLot() {
 

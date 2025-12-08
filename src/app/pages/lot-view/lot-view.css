@@ -1,24 +1,94 @@
 .main {
   padding: 5%;
   width: 100%;
-  height: 100%;
+  box-sizing: border-box;
 }
 
 .data {
   background: #fff;
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
+  gap: 2rem;
 }
 
+/* LEFT SIDE: image column */
 .images {
-  width: 100%;
+  flex: 0 0 500px;      /* fixed-ish width, doesn’t shrink weirdly */
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
 }
 
-.info {
+/* Main image area: fixed aspect ratio so layout never jumps */
+.main-image {
   width: 100%;
-  padding: 5%;
+  aspect-ratio: 4 / 3;  /* always same shape */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.big-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;      /* fit entirely, no cropping */
+  display: block;
+}
+
+/* Thumbnails strip */
+.thumbnails {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;        /* fill square */
+  border-radius: 6px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.thumb:hover {
+  transform: scale(1.05);
+}
+
+.thumb.active {
+  border-color: #0066ff;
+}
+
+/* RIGHT SIDE: info column */
+.info {
+  flex: 1 1 auto;
+  padding: 2rem 1rem 2rem 0;
+  box-sizing: border-box;
 }
 
 p {
   white-space: pre-line;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 768px) {
+  .data {
+    flex-direction: column;
+  }
+
+  .images {
+    margin-right: 0;
+    max-width: 100%;
+  }
+
+  .main-image {
+    aspect-ratio: 1 / 1; /* more square on mobile if you like */
+  }
 }

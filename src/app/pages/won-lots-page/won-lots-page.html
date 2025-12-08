@@ -28,6 +28,7 @@
       <tbody>
         @for (lot of lots; track lot.id) {
           <tr>
+
             <td>{{ lot.lotNumber }}</td>
             <td>{{ lot.title }}</td>
             <td>{{ lot.estimatedPrice | number: '1.0-2' }} kr.</td>

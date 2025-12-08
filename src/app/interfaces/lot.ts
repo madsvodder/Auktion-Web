@@ -1,4 +1,5 @@
 import {Auction} from './auction';
+import {LotImage} from './lot-image';
 
 export interface Lot {
   id: number,
@@ -10,4 +11,5 @@ export interface Lot {
   estimatedPrice: number,
   auctionId: number,
   winnerUserId?: number;
+  images?: LotImage[];
 }
