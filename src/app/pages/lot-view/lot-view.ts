@@ -7,6 +7,7 @@ import {Bid} from '../../interfaces/bid';
 import {FormsModule} from '@angular/forms';
 import {LoginService} from '../../services/login-service';
 import {TokenService} from '../../services/token-service';
+import {BidDto} from '../../dto/bid-dto';
 
 @Component({
   selector: 'app-lot-view',
@@ -80,19 +81,21 @@ export class LotView implements OnInit {
 
   bidOnLot() {
 
-    let placedBid: Bid = {
+    let placedBid: BidDto = {
       lotId: this.lot!.id,
       userId: this.loginService.getUserId(),
       amount: this.bidAmount,
       placedAt: new Date(),
+      username: this.loginService.getUsername(),
     }
 
     this.apiService.bidOnLot(placedBid).subscribe({
       next: res => {
-        alert("Bid placed successfully")
+        // refresh highest bid
+        this.getHighestBid();
       },
       error: (err) => {
-        alert("Please login!");
+        alert("Please login or refresh!");
       }
     });
   }

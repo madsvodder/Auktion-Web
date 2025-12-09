@@ -18,8 +18,19 @@ export class BidOverview implements OnInit {
   @Input() lot!: Lot;
 
   ngOnInit() {
-    console.log(this.lot);
+    // Load all bids from current lot
     this.apiService.loadBidsFromLot(<number>this.lot?.id)
+
+    // Join SignalR group for this lot
+    this.apiService.connectToBidHub(this.lot.id);
+  }
+
+  ngOnDestroy() {
+    // Leave the group when component destroyed
+    if (this.lot?.id) {
+      this.apiService.leaveLot(this.lot.id);
+      this.apiService.disconnectBidHub();
+    }
   }
 
   protected readonly DatePipe = DatePipe;

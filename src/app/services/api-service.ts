@@ -7,6 +7,8 @@ import {Observable} from 'rxjs';
 import {LoginService} from './login-service';
 import {BidDto} from '../dto/bid-dto';
 import {LotImage} from '../interfaces/lot-image';
+import * as signalR from '@microsoft/signalr';
+
 
 @Injectable({
   providedIn: 'root',
@@ -34,6 +36,61 @@ export class ApiService {
   bidsInCurrentLot = signal<BidDto[]>([]);
 
   constructor(private http: HttpClient) {}
+
+  private hubConnection?: signalR.HubConnection;
+  private currentLotId?: number;
+
+  // SignalR
+  connectToBidHub(lotId: number) {
+
+    this.currentLotId = lotId;
+
+    // Build connection
+    if (!this.hubConnection) {
+      this.hubConnection = new signalR.HubConnectionBuilder()
+        .withUrl('http://localhost:5264/hubs/bids')
+        .withAutomaticReconnect()
+        .build();
+    }
+
+    // New bid refresh
+    this.hubConnection.on('NewBid', (bid: BidDto) => {
+      // Make sure it's the correct current lot
+      if (bid.lotId === this.currentLotId) {
+        // Add new bid to the list
+        this.bidsInCurrentLot.update(bids => [bid, ...bids]);
+      }
+    });
+
+    // Start connection
+    this.hubConnection
+      .start()
+      .then(() => {
+        if (this.currentLotId != null) {
+          this.hubConnection!.invoke('JoinLot', this.currentLotId.toString())
+            .then(r => console.log('Lot connection started: ' + r));
+        }
+      })
+    .catch((err) => {
+      console.error('Error starting SignalR connection', err);
+    })
+  }
+
+  leaveLot(lotId: number) {
+    if (this.hubConnection) {
+      this.hubConnection.invoke('LeaveLot', lotId.toString()).catch(console.error);
+    }
+  }
+
+  disconnectBidHub() {
+    if (this.hubConnection) {
+      this.hubConnection.stop();
+      this.hubConnection = undefined;
+      this.currentLotId = undefined;
+    }
+  }
+
+  // Our methods for API stuff
 
   loadAuctions() {
     this.http.get<Auction[]>(this.getAuctionsUrl).subscribe(res => {
@@ -63,7 +120,7 @@ export class ApiService {
     });
   }
 
-  bidOnLot(bidInput: Bid) {
+  bidOnLot(bidInput: BidDto) {
 
     let headers = this.loginService.getLoginHeader()
 
