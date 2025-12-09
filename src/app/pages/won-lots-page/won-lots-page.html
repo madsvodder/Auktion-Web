@@ -21,6 +21,7 @@
         <th>Titel</th>
         <th>Estimeret pris</th>
         <th>Slutpris</th>
+        <th>Slutpris med gebyr</th>
         <th>Auktions-ID</th>
       </tr>
       </thead>
@@ -34,6 +35,9 @@
             <td>{{ lot.estimatedPrice | number: '1.0-2' }} kr.</td>
             <td>
               {{ lot.endingPrice != null ? (lot.endingPrice | number: '1.0-2') + ' kr.' : '-' }}
+            </td>
+            <td>
+              {{ lot.endingPrice != null ? (lot.endingPrice * 1.25 | number: '1.0-2') + ' kr.' : '-' }}
             </td>
             <td>{{ lot.auctionId }}</td>
           </tr>
