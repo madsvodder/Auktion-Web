@@ -29,6 +29,7 @@ export class ApiService {
   private getLotFromAuctionIdUrl = "http://localhost:5264/api/Lot/"
   private getAuctionUrl = "http://localhost:5264/api/Auction/"
   private getHighestBidUrl = "http://localhost:5264/api/Bid/lot/"
+  private getWinnerUrl = "http://localhost:5264/api/Lot/"
 
   // Lists
   auctions = signal<Auction[]>([]);
@@ -144,6 +145,14 @@ export class ApiService {
       this.getHighestBidUrl + lotId + "/highest"
     )
   }
+
+  // api-service.ts
+  getWinner(lotId: number) {
+    return this.http.get<{ email: string }>(
+      this.getWinnerUrl + lotId + "/winner"
+    );
+  }
+
 
   uploadImages(lotId: number, files: FileList | File[]): Observable<LotImage[]> {
     const formData = new FormData();

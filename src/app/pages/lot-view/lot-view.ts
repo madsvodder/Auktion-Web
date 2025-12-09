@@ -119,7 +119,11 @@ export class LotView implements OnInit {
     const diff = endTimeMs - now;
 
     if (diff <= 0) {
-      this.countdown = 'Auktionen er slut';
+      this.lot!.isClosed = true;
+      // Subscribe
+      this.apiService.getWinner(this.lot!.id).subscribe(winner => {
+        this.countdown = 'Auktionen er slut. Tillykke til: ' + winner.email;
+      });
       if (this.countdownIntervalId) {
         clearInterval(this.countdownIntervalId);
       }
