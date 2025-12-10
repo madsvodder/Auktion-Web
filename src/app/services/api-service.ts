@@ -153,7 +153,6 @@ export class ApiService {
     );
   }
 
-
   uploadImages(lotId: number, files: FileList | File[]): Observable<LotImage[]> {
     const formData = new FormData();
 

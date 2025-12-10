@@ -1,3 +1,7 @@
+.main {
+  margin: 1rem;
+}
+
 #lot-info {
   width: 80%;
   border: 2px solid #000000;
@@ -7,4 +11,52 @@
 .cards {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+#lot-info {
+  width: 80%;
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+  box-sizing: border-box;
+}
+
+#lot-info h3 {
+  margin-top: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+#lot-info h5 {
+  margin-bottom: 0.3rem;
+  margin-top: 1.2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #444;
+}
+
+#lot-info p {
+  margin: 0 0 0.8rem;
+  line-height: 1.5;
+  color: #333;
+}
+
+#lot-info hr {
+  border: 0;
+  border-top: 1px solid #e0e0e0;
+  margin: 1.2rem 0;
+}
+
+/* Create Lot button area */
+#lot-info a button {
+  margin-bottom: 1rem;
+}
+
+/* Optional subtle hover for the wrapper */
+#lot-info:hover {
+  border-color: #ccc;
 }

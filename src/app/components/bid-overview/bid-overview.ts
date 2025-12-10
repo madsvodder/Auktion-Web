@@ -1,7 +1,6 @@
 import {Component, inject, Input, input, OnInit} from '@angular/core';
 import {ApiService} from '../../services/api-service';
 import {Lot} from '../../interfaces/lot';
-import {Bid} from '../../interfaces/bid';
 import {DatePipe} from '@angular/common';
 
 @Component({

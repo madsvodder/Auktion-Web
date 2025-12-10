@@ -1,13 +1,6 @@
-<div>
+<div class="main">
+
   <div id="lot-info">
-
-    @if (loginService.isAdmin()) {
-      <a [routerLink]="['/create-lot', auction.id]">
-        <button type="button" class="btn btn-primary">Create Lot</button>
-      </a>
-
-    }
-
     <h3 id="title">{{ auction?.title }}</h3>
 
     <hr>
@@ -18,14 +11,24 @@
     <hr>
 
     <h5>Auktionen slutter</h5>
-    <p>{{ auction?.endDate }}</p>
+    <p>{{ auction?.endDate | date:'h:mm - MMM d'}}</p>
+
+    @if (loginService.isAdmin()) {
+      <a [routerLink]="['/create-lot', auction.id]">
+        <button type="button" class="btn btn-primary">Create Lot</button>
+      </a>
+    }
   </div>
-</div>
+
 
 <div class="cards">
   @for (lot of apiService.lots(); track lot.lotNumber) {
     <div class="card" style="width: 18rem;">
-      <img src="https://images.ctfassets.net/yb682zl7v5ka/2957544974423012041/35ee7f891e411630a2885e738657181d/maxi1.png?w=1200&h=1047&fm=webp" class="card-img-top" alt="...">
+      <img
+        [src]="lot.images?.[0]?.url || 'https://thumbs.dreamstime.com/b/minimalist-logo-features-brown-outline-gavel-sound-block-symbolizing-justice-auctions-below-placeholder-text-lorem-401168018.jpg'"
+        class="card-img-top"
+        alt="{{ lot.title }}"
+      >
       <div class="card-body">
         <h5 class="card-title">{{ lot.title }}</h5>
         <p class="card-text">{{ lot.lotNumber }}</p>

@@ -44,31 +44,43 @@
       <div class="meta">
         <h4> Lot nr. {{ lot?.lotNumber }}</h4>
         <hr>
+        <h4>Beskrivelse</h4>
         <p>{{ lot?.description }}</p>
-
-        @if (lot?.endTime && countdown) {
-          <div class="countdown">
-            <h3>Tilbageværende tid:</h3>
-            <p>{{ countdown }}</p>
-          </div>
-        }
       </div>
+
+      <hr>
+
+      <h5>Start pris: {{ lot?.startingPrice }}</h5>
+      <h5>Vurderet til: {{ lot?.estimatedPrice }}</h5>
 
       <hr>
 
       @if (lot && !lot.isClosed) {
         <div class="bidding">
 
+          @if (lot?.endTime && countdown) {
+            <div class="countdown">
+              <h4>Tilbageværende tid:</h4>
+              <h5>{{ countdown }}</h5>
+            </div>
+          }
+
+          @if (highestBid) {
+            <h4>Højeste bud: {{ highestBid }}</h4>
+            <p>inkl. moms og salær: {{ highestBid * 1.5}} kr.</p>
+          }
+
           <div class="bid">
-            <label for="amount">Amount:</label>
+            <label for="amount"></label>
             <input
               [(ngModel)]="bidAmount"
-              [value]="highestBid"
+              [min]="minBid"
+              [value]="minBid"
               type="number"
               id="amount"
-              name="amount"
-              min="highestBid">
-            <button (click)="bidOnLot()">Byd!</button>
+              name="amount">
+
+            <button class="btn btn-secondary" (click)="bidOnLot()">Byd!</button>
           </div>
 
           <app-bid-overview [lot]="lot"></app-bid-overview>

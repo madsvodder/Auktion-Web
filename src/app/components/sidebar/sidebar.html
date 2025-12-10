@@ -5,6 +5,9 @@
       <img src="https://gcdnb.pbrd.co/images/VPNPpP04EtPB.jpg?o=1" alt="Logo">
     </a>
   </div>
+  @if (loginService.isLoggedIn()) {
+    <h6>Velkommen {{ loginService.getUsername() }}!</h6>
+  }
 
   <div class="nav-buttons">
     @if (loginService.isAdmin()) {

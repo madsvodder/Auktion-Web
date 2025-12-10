@@ -1,7 +1,6 @@
-import { Component, inject } from '@angular/core';
-import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import {Component, inject} from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { LoginService } from '../../services/login-service';
-import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
