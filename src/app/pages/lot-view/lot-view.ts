@@ -29,6 +29,7 @@ export class LotView implements OnInit {
   public highestBid?: number;
   public bidAmount: number = 1;
   public minBid: number = 1;
+  public winner: string | null = null;
 
   lot: Lot | null = null;
 
@@ -127,7 +128,7 @@ export class LotView implements OnInit {
       this.lot!.isClosed = true;
       // Subscribe
       this.apiService.getWinner(this.lot!.id).subscribe(winner => {
-        this.countdown = 'Auktionen er slut. Tillykke til: ' + winner.email;
+        this.winner = winner.email;
       });
       if (this.countdownIntervalId) {
         clearInterval(this.countdownIntervalId);
