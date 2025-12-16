@@ -1,5 +1,5 @@
 import {Component, Inject, inject, OnInit} from '@angular/core';
-import {NonNullableFormBuilder, ReactiveFormsModule} from "@angular/forms";
+import {NonNullableFormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {ApiService} from '../../services/api-service';
@@ -39,11 +39,11 @@ export class CreateLotPage implements OnInit {
 
   // Form
   form = this.fb.group({
-    title: this.fb.control(''),
-    description: this.fb.control(''),
-    estimatedPrice: this.fb.control(0),
-    startingPrice: this.fb.control(0),
-    endTime: this.fb.control(''),
+    title: ['', Validators.required],
+    description: ['', Validators.required],
+    estimatedPrice: [1, [Validators.required, Validators.min(1)]],
+    startingPrice: [1, [Validators.required, Validators.min(1)]],
+    endTime: ['', Validators.required]
   });
 
   createLot() {

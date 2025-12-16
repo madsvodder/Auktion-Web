@@ -8,12 +8,14 @@ import {FormsModule} from '@angular/forms';
 import {LoginService} from '../../services/login-service';
 import {TokenService} from '../../services/token-service';
 import {BidDto} from '../../dto/bid-dto';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-lot-view',
   imports: [
     BidOverview,
-    FormsModule
+    FormsModule,
+    NgIf
   ],
   templateUrl: './lot-view.html',
   styleUrl: './lot-view.css',
@@ -129,6 +131,7 @@ export class LotView implements OnInit {
       // Subscribe
       this.apiService.getWinner(this.lot!.id).subscribe(winner => {
         this.winner = winner.email;
+        console.log("The winner is: " + winner.email);
       });
       if (this.countdownIntervalId) {
         clearInterval(this.countdownIntervalId);
