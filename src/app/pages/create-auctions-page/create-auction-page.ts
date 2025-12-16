@@ -29,9 +29,9 @@ export class CreateAuctionPage {
 
   // Form
   form = this.fb.group({
-    title: this.fb.control(''),
-    description: this.fb.control(''),
-    endDate: this.fb.control(''),
+    title: ['', Validators.required],
+    description: ['', Validators.required],
+    endDate: ['', Validators.required],
   })
 
   createAuction() {

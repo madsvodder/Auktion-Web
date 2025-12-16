@@ -10,6 +10,8 @@
   flex-direction: row;
   align-items: flex-start;
   gap: 2rem;
+  padding: 1rem;
+  border-radius: 10px;
 }
 
 /* LEFT SIDE: image column */
