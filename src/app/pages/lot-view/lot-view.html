@@ -52,8 +52,9 @@
 
       <h5>Start pris: {{ lot?.startingPrice }}</h5>
       <h5>Vurderet til: {{ lot?.estimatedPrice }}</h5>
+      @if (lot?.isClosed) {
       <h5>Auktionen er slut tillykke til: {{winner}}</h5>
-
+      }
       <hr>
 
       @if (lot && !lot.isClosed) {
