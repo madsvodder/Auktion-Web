@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, effect, inject, Injector, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ApiService} from '../../services/api-service';
 import {Lot} from '../../interfaces/lot';
@@ -8,20 +8,18 @@ import {FormsModule} from '@angular/forms';
 import {LoginService} from '../../services/login-service';
 import {TokenService} from '../../services/token-service';
 import {BidDto} from '../../dto/bid-dto';
-import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-lot-view',
   imports: [
     BidOverview,
     FormsModule,
-    NgIf
   ],
   templateUrl: './lot-view.html',
   styleUrl: './lot-view.css',
 })
 export class LotView implements OnInit {
-
+  private injector = inject(Injector);
   // Countdown!
   countdown: string = '';
   private countdownIntervalId: any;
@@ -44,8 +42,20 @@ export class LotView implements OnInit {
 
   selectedImage: string | null = null;
 
+
   selectImage(url: string) {
     this.selectedImage = url;
+  }
+
+  // Trigger a refresh when a bid is placed
+  constructor() {
+    effect(
+      () => {
+        const bids = this.apiService.bidsInCurrentLot();
+        this.getHighestBid();
+      },
+      { injector: this.injector }
+    );
   }
 
   ngOnInit() {
