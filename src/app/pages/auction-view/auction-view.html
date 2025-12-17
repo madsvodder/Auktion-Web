@@ -15,7 +15,7 @@
 
     @if (loginService.isAdmin()) {
       <a [routerLink]="['/create-lot', auction.id]">
-        <button type="button" class="btn btn-primary">Create Lot</button>
+        <button type="button" class="btn btn-primary">Opret Lot</button>
       </a>
     }
   </div>
@@ -31,8 +31,8 @@
       >
       <div class="card-body">
         <h5 class="card-title">{{ lot.title }}</h5>
-        <p class="card-text">{{ lot.lotNumber }}</p>
-        <a [routerLink]="['/auctions', auction?.id, 'lot', lot.lotNumber]" class="btn btn-primary">Go To Lot</a>
+        <p class="card-text">Lot nr. {{ lot.lotNumber }}</p>
+        <a [routerLink]="['/auctions', auction?.id, 'lot', lot.lotNumber]" class="btn btn-primary">Gå til lot</a>
       </div>
     </div>
   }

@@ -2,22 +2,22 @@
 <div class="main">
   <div class="form-group">
   <form [formGroup]="form" (ngSubmit)="createAuction()">
-    <label for="title">Title</label>
+    <label for="title">Titel</label>
     <input formControlName="title" class="form-control" type="text" id="title">
 
     <hr>
 
-    <label for="description">Description</label>
+    <label for="description">Beskrivelse</label>
     <textarea formControlName="description" class="form-control" id="description" rows="3"></textarea>
 
     <hr>
 
-    <label for="end">End date</label>
+    <label for="end">Slut dato</label>
     <input formControlName="endDate" class="form-control" type="datetime-local" id="end">
 
     <hr>
 
-    <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Create Auction</button>
+    <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Opret auktion</button>
   </form>
   </div>
 </div>
